@@ -18,13 +18,13 @@ public class SocketController {
 
     @MessageMapping("/hello")
     @SendTo("/topic/messages")
-    public String greeting(@RequestBody String message) {
+    public String sendMessage(@RequestBody String message) {
         log.info("Submitted: " + message);
         return "Submit message: " + message;
     }
 
     @PostMapping("/submit")
-    public void receive(@RequestBody String message) {
+    public void receiveMessage(@RequestBody String message) {
         this.simpMessagingTemplate.convertAndSend("/topic/messages", "Received message: " + message);
     }
 }
